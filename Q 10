@@ -1,0 +1,19 @@
+Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+
+
+SELECT * FROM
+    (
+    SELECT CITY, LENGTH(CITY)       // here i created a table ordered with 1st length then name & selected top most out of it
+    FROM STATION
+    ORDER BY LENGTH(CITY) DESC, CITY
+    )as b
+limit 1;
+
+SELECT * FROM
+    (
+    SELECT CITY, LENGTH(CITY) FROM STATION
+    ORDER BY LENGTH(CITY), CITY
+    )as a
+limit 1
+
+
