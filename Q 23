@@ -1,0 +1,41 @@
+Amber's conglomerate corporation just acquired some new companies. 
+Each of the companies follows this hierarchy: 
+ with multiple tables
+
+
+select c.company_code, 
+    c.founder, 
+    count(distinct e.lead_manager_code), 
+    count(distinct e.senior_manager_code), 
+    count(distinct e.manager_code), 
+    count(distinct e.employee_code)
+from company c
+    inner join employee e on e.company_code = c.company_code
+group by c.company_code,c.founder
+order by c.company_code;
+
+
+
+
+
+/*
+print company code , founder name , total number of lead managers , total no. of senior managers , total number of managers , toat numbers of emplot=yss , 
+order by company code 
+*/
+select  c.company_code, 
+        c.founder, 
+        count(distinct l.lead_manager_code), 
+        count(distinct s.senior_manager_code), 
+        count(distinct m.manager_code),
+        count(distinct e.employee_code) 
+from    Company c, 
+        Lead_Manager l, 
+        Senior_Manager s, 
+        Manager m, 
+        Employee e 
+where       c.company_code = l.company_code 
+        and l.lead_manager_code=s.lead_manager_code 
+        and s.senior_manager_code=m.senior_manager_code 
+        and m.manager_code=e.manager_code 
+group by c.company_code 
+order by c.company_code;
